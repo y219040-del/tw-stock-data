@@ -28,7 +28,8 @@ jobs:
           python-version: "3.11"
 
       - name: 安裝套件
-        run: pip install requests pandas
+        run: pip install requests pandas lxml
+
 
       - name: 執行爬蟲（有時間預算，時間到會安全中斷）
         env:
