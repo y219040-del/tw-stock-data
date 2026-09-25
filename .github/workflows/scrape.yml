@@ -1,0 +1,44 @@
+name: 台股資料爬蟲
+
+# 觸發方式：
+# 1. schedule → 每 6 小時自動跑一次（GitHub Actions 免費方案單次工作最長 6 小時，
+#    所以用排程反覆接續，直到全部股票、10年資料都抓完為止）
+# 2. workflow_dispatch → 你可以在手機 Safari 打開 repo 的 Actions 分頁，
+#    點「Run workflow」按鈕手動觸發，方便測試
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+# 讓 workflow 有權限把抓到的資料 commit 回這個 repo
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350   # 保險上限，實際程式會在340分鐘時自己安全停止
+    steps:
+      - name: 簽出 repo（含前幾次已存的進度）
+        uses: actions/checkout@v4
+
+      - name: 設定 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安裝套件
+        run: pip install requests pandas
+
+      - name: 執行爬蟲（有時間預算，時間到會安全中斷）
+        env:
+          TIME_BUDGET_MINUTES: "340"
+        run: python3 tw_stock_scraper.py
+
+      - name: 把新抓到的資料存回 repo
+        run: |
+          git config user.name "tw-stock-bot"
+          git config user.email "actions@github.com"
+          git add output/ scraper.log
+          git diff --cached --quiet || git commit -m "更新台股資料 $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
