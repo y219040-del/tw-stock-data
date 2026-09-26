@@ -3927,3 +3927,25 @@
 2026-09-26 12:18:22,972 [ERROR] $6806.TW: No data found, symbol may be delisted
 2026-09-26 12:18:22,972 [INFO] [6806 森崴能源] 無資料或抓取失敗
 2026-09-26 12:18:24,690 [INFO] === 本次執行結束：新完成 0 檔，跳過已存在 1920 檔，失敗 5 檔（共 1925 檔）===
+2026-09-26 18:17:09,738 [INFO] 本次執行時間預算：340 分鐘，時間到會安全中斷並保留進度。
+2026-09-26 18:17:09,738 [INFO] === 台股全市場歷史資料爬蟲開始 (Yahoo Finance 版) ===
+2026-09-26 18:17:09,738 [INFO] 抓取範圍：近 10 年 (yfinance period=10y)
+2026-09-26 18:17:09,742 [INFO] 使用已快取的股票清單，共 1925 檔
+2026-09-26 18:17:09,744 [INFO] 進度 158/1925：上櫃 3426 台興 (3426.TWO)
+2026-09-26 18:17:10,590 [ERROR] HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: 3426.TWO"}}}
+2026-09-26 18:17:10,940 [ERROR] $3426.TWO: No data found, symbol may be delisted
+2026-09-26 18:17:10,941 [INFO] [3426 台興] 無資料或抓取失敗
+2026-09-26 18:17:12,146 [INFO] 進度 251/1925：上櫃 4130 健亞 (4130.TWO)
+2026-09-26 18:17:12,625 [ERROR] HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: 4130.TWO"}}}
+2026-09-26 18:17:12,954 [ERROR] $4130.TWO: No data found, symbol may be delisted
+2026-09-26 18:17:12,955 [INFO] [4130 健亞] 無資料或抓取失敗
+2026-09-26 18:17:14,661 [INFO] 進度 365/1925：上櫃 4987 科誠 (4987.TWO)
+2026-09-26 18:17:15,142 [ERROR] $4987.TWO: No data found, symbol may be delisted
+2026-09-26 18:17:15,143 [INFO] [4987 科誠] 無資料或抓取失敗
+2026-09-26 18:17:16,602 [INFO] 進度 388/1925：上櫃 5236 凌陽創新 (5236.TWO)
+2026-09-26 18:17:17,069 [ERROR] $5236.TWO: No data found, symbol may be delisted
+2026-09-26 18:17:17,070 [INFO] [5236 凌陽創新] 無資料或抓取失敗
+2026-09-26 18:17:18,598 [INFO] 進度 1780/1925：上市 6806 森崴能源 (6806.TW)
+2026-09-26 18:17:19,062 [ERROR] $6806.TW: No data found, symbol may be delisted
+2026-09-26 18:17:19,063 [INFO] [6806 森崴能源] 無資料或抓取失敗
+2026-09-26 18:17:20,626 [INFO] === 本次執行結束：新完成 0 檔，跳過已存在 1920 檔，失敗 5 檔（共 1925 檔）===
