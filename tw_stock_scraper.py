@@ -1,227 +1,182 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-台股全市場歷史資料爬蟲 (Yahoo Finance 版)
-========================================
-改版原因：
-  原本直接打台灣證交所(TWSE) API 的版本，在 GitHub Actions 上會被證交所的
-  地區防火牆擋掉（非台灣IP直接回傳擋頁），所以改用 Yahoo Finance 當資料源：
-  - 全球都能存取，不會被地區防火牆擋
-  - 一檔股票一次 API 呼叫就能拿到完整多年資料（不用像原本那樣一個月一個月抓）
-  - 股票清單改用 twstock 套件內建的資料（不用再打證交所的網頁）
+台股資料爬蟲（FinMind 版）
 
-輸出：
-  - ./output/<股票代號>_<股票名稱>.csv   （每檔股票一個檔案，欄位：Date, Open, High, Low, Close, Volume）
-  - ./output/stock_list.csv              （完整股票清單：代號/名稱/市場別）
+資料來源：FinMind API (https://api.finmindtrade.com)
+- 未登入額度：300 次請求 / 小時
+- 本程式用固定間隔（13 秒/次）控制請求速率，換算約 277 次/小時，留有安全餘裕
+- 若被 FinMind 暫時封鎖 IP（403），會直接安全結束，等下一次排程（6 小時後）自動重試
+- 支援跨執行續傳：進度存在 output/progress.json，下次執行會接著跑未完成的股票
 
-使用方式：
-  1. pip install twstock yfinance pandas requests
-  2. 依需求調整下方「設定區」的參數
-  3. python3 tw_stock_scraper.py
+用法：
+    TIME_BUDGET_MINUTES=340 python3 tw_stock_scraper.py
 """
 
 import os
+import sys
+import json
 import time
-import random
-import datetime
 import logging
-from pathlib import Path
-
+import requests
 import pandas as pd
-import twstock
-import yfinance as yf
+from datetime import datetime, timedelta
 
-# ============================================================
-# 設定區 — 依你的需求調整
-# ============================================================
+# ---------- 設定 ----------
+BASE_URL = "https://api.finmindtrade.com/api/v4/data"
+DATASET_INFO = "TaiwanStockInfo"
+DATASET_PRICE = "TaiwanStockPrice"
 
-# 要抓幾年的資料。Yahoo Finance 的 period 參數只接受特定字串，
-# 這裡會自動對應到最接近的合法值：1y,2y,5y,10y,max
-YEARS_BACK = 10
+OUTPUT_DIR = "output"
+PRICE_DIR = os.path.join(OUTPUT_DIR, "prices")
+PROGRESS_FILE = os.path.join(OUTPUT_DIR, "progress.json")
+LOG_FILE = "scraper.log"
 
-# 輸出資料夾
-OUTPUT_DIR = Path("./output")
+START_DATE = (datetime.today() - timedelta(days=365 * 10)).strftime("%Y-%m-%d")
 
-# 是否包含上市(TWSE, 代號後綴 .TW)、上櫃(TPEx, 代號後綴 .TWO)
-INCLUDE_TWSE = True
-INCLUDE_TPEX = True
+REQUEST_INTERVAL_SECONDS = 13   # 3600/13 ≈ 277 次/hr，低於 300 次/hr 上限留安全餘裕
+MAX_RETRY_PER_STOCK = 3         # 單一股票遇到暫時性錯誤時的重試次數
 
-# 每次抓取之間的延遲秒數（避免被 Yahoo Finance 短時間限流 HTTP 429）
-REQUEST_DELAY_SEC = 1.2
-REQUEST_DELAY_JITTER = 0.8
+TIME_BUDGET_MINUTES = float(os.environ.get("TIME_BUDGET_MINUTES", "340"))
 
-# 遇到錯誤時最大重試次數
-MAX_RETRIES = 3
-RETRY_BACKOFF_SEC = 15
-
-# 測試模式：True 的話只抓前 N 檔股票，方便先驗證流程
-TEST_MODE = False
-TEST_STOCK_LIMIT = 5
-
-# 單次執行的時間預算(分鐘)。GitHub Actions 免費方案單次工作最長跑 6 小時，
-# 這裡設定成 340 分鐘(約5小時40分)，跑到時間快到就安全中斷、存檔，
-# 下次排程觸發時會自動從斷點繼續。本機執行可以設 None 代表不限制。
-TIME_BUDGET_MINUTES = int(os.environ.get("TIME_BUDGET_MINUTES", "340"))
-
-# 已經抓過、檔案存在就跳過（除非你想強制全部重抓）
-SKIP_EXISTING = True
-
-# ============================================================
-# 記錄檔設定
-# ============================================================
+# ---------- 記錄設定 ----------
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("scraper.log", encoding="utf-8"),
-        logging.StreamHandler(),
+        logging.FileHandler(LOG_FILE, encoding="utf-8"),
+        logging.StreamHandler(sys.stdout),
     ],
 )
 log = logging.getLogger(__name__)
 
 
-def sleep_politely():
-    time.sleep(REQUEST_DELAY_SEC + random.uniform(0, REQUEST_DELAY_JITTER))
+def ensure_dirs():
+    os.makedirs(PRICE_DIR, exist_ok=True)
 
 
-def years_to_period(years):
-    """把想要的年數對應到 yfinance 合法的 period 字串"""
-    valid = [1, 2, 5, 10]
-    for v in valid:
-        if years <= v:
-            return f"{v}y"
-    return "max"
-
-
-PERIOD = years_to_period(YEARS_BACK)
-
-
-# ============================================================
-# 第一步：取得完整股票清單（改用 twstock 內建資料，不再打證交所網頁）
-# ============================================================
-def fetch_stock_list():
-    log.info("正在從 twstock 套件取得股票清單（使用套件內建資料，不會被防火牆擋）...")
-
-    rows = []
-    for code, info in twstock.codes.items():
-        if info.type != "股票":
-            continue
-        if info.market == "上市" and not INCLUDE_TWSE:
-            continue
-        if info.market == "上櫃" and not INCLUDE_TPEX:
-            continue
-        if info.market not in ("上市", "上櫃"):
-            continue
-        if not code.isdigit():
-            continue
-
-        suffix = ".TW" if info.market == "上市" else ".TWO"
-        rows.append(
-            {
-                "code": code,
-                "name": info.name,
-                "market": info.market,
-                "yahoo_symbol": f"{code}{suffix}",
-            }
-        )
-
-    df_list = pd.DataFrame(rows).drop_duplicates(subset=["code"])
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    df_list.to_csv(OUTPUT_DIR / "stock_list.csv", index=False, encoding="utf-8-sig")
-    log.info(f"股票清單取得完成，共 {len(df_list)} 檔，已存到 stock_list.csv")
-    return df_list
-
-
-# ============================================================
-# 第二步：用 yfinance 抓單一股票的歷史資料
-# ============================================================
-def fetch_one_stock(yahoo_symbol, period):
-    for attempt in range(1, MAX_RETRIES + 1):
-        try:
-            ticker = yf.Ticker(yahoo_symbol)
-            df = ticker.history(period=period, auto_adjust=False)
-            if df is None or df.empty:
-                return None
-            df = df.reset_index()
-            # 只保留常用欄位，日期轉成純日期字串
-            df["Date"] = pd.to_datetime(df["Date"]).dt.strftime("%Y-%m-%d")
-            keep_cols = [c for c in ["Date", "Open", "High", "Low", "Close", "Volume"] if c in df.columns]
-            return df[keep_cols]
-        except Exception as e:
-            log.warning(f"[{yahoo_symbol}] 第{attempt}次抓取失敗: {e}")
-            if attempt < MAX_RETRIES:
-                time.sleep(RETRY_BACKOFF_SEC)
-    log.error(f"[{yahoo_symbol}] 已達最大重試次數，放棄。")
+def load_progress():
+    """讀取進度檔；若不存在，回傳 None 代表需要重新初始化股票清單"""
+    if os.path.exists(PROGRESS_FILE):
+        with open(PROGRESS_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
     return None
 
 
-def safe_filename(code, name):
-    # 股票名稱可能含有斜線等符號，簡單清理一下避免存檔失敗
-    safe_name = "".join(c for c in name if c not in r'\/:*?"<>|')
-    return f"{code}_{safe_name}.csv"
+def save_progress(progress):
+    with open(PROGRESS_FILE, "w", encoding="utf-8") as f:
+        json.dump(progress, f, ensure_ascii=False, indent=2)
 
 
-# ============================================================
-# 第三步：主流程
-# ============================================================
+def fetch_stock_list():
+    """取得全部台股代碼清單（含上市、上櫃）"""
+    log.info("首次執行，向 FinMind 取得股票清單（%s）...", DATASET_INFO)
+    resp = requests.get(BASE_URL, params={"dataset": DATASET_INFO}, timeout=30)
+    resp.raise_for_status()
+    data = resp.json().get("data", [])
+    stock_ids = sorted({row["stock_id"] for row in data if row.get("stock_id")})
+    log.info("取得 %d 檔股票代碼", len(stock_ids))
+    return stock_ids
+
+
+def fetch_price(stock_id):
+    """向 FinMind 要單一股票從 START_DATE 到今天的所有日線資料"""
+    params = {
+        "dataset": DATASET_PRICE,
+        "data_id": stock_id,
+        "start_date": START_DATE,
+    }
+    resp = requests.get(BASE_URL, params=params, timeout=30)
+    return resp
+
+
+def save_price_csv(stock_id, rows):
+    if not rows:
+        log.info("[%s] 無資料，略過存檔", stock_id)
+        return
+    df = pd.DataFrame(rows)
+    path = os.path.join(PRICE_DIR, f"{stock_id}.csv")
+    df.to_csv(path, index=False, encoding="utf-8-sig")
+    log.info("[%s] 已存 %d 筆 → %s", stock_id, len(df), path)
+
+
 def main():
+    ensure_dirs()
     start_time = time.monotonic()
-    deadline = None
-    if TIME_BUDGET_MINUTES:
-        deadline = start_time + TIME_BUDGET_MINUTES * 60
-        log.info(f"本次執行時間預算：{TIME_BUDGET_MINUTES} 分鐘，時間到會安全中斷並保留進度。")
+    deadline_seconds = TIME_BUDGET_MINUTES * 60
 
-    log.info("=== 台股全市場歷史資料爬蟲開始 (Yahoo Finance 版) ===")
-    log.info(f"抓取範圍：近 {YEARS_BACK} 年 (yfinance period={PERIOD})")
+    progress = load_progress()
+    if progress is None:
+        all_ids = fetch_stock_list()
+        progress = {"all_stock_ids": all_ids, "done": [], "failed": []}
+        save_progress(progress)
 
-    stock_list_path = OUTPUT_DIR / "stock_list.csv"
-    if stock_list_path.exists():
-        stock_list = pd.read_csv(stock_list_path, dtype=str)
-        log.info(f"使用已快取的股票清單，共 {len(stock_list)} 檔")
-    else:
-        stock_list = fetch_stock_list()
-
-    if TEST_MODE:
-        stock_list = stock_list.head(TEST_STOCK_LIMIT)
-        log.info(f"*** 測試模式開啟：只抓 {len(stock_list)} 檔股票 ***")
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    total = len(stock_list)
-    done_count = 0
-    skip_count = 0
-    fail_count = 0
-
-    for i, row in enumerate(stock_list.itertuples(), 1):
-        if deadline and time.monotonic() >= deadline:
-            log.warning(
-                f"已達本次時間預算上限，於第 {i}/{total} 檔股票前安全停止。"
-                "已完成的資料都已存檔，下次排程執行會自動接續。"
-            )
-            break
-
-        out_path = OUTPUT_DIR / safe_filename(row.code, row.name)
-        if SKIP_EXISTING and out_path.exists():
-            skip_count += 1
-            continue
-
-        log.info(f"進度 {i}/{total}：{row.market} {row.code} {row.name} ({row.yahoo_symbol})")
-        df = fetch_one_stock(row.yahoo_symbol, PERIOD)
-
-        if df is not None and not df.empty:
-            df.to_csv(out_path, index=False, encoding="utf-8-sig")
-            done_count += 1
-            log.info(f"[{row.code} {row.name}] 已存檔，共 {len(df)} 筆")
-        else:
-            fail_count += 1
-            log.info(f"[{row.code} {row.name}] 無資料或抓取失敗")
-
-        sleep_politely()
+    all_ids = progress["all_stock_ids"]
+    done = set(progress["done"])
+    failed = set(progress.get("failed", []))
+    pending = [s for s in all_ids if s not in done and s not in failed]
 
     log.info(
-        f"=== 本次執行結束：新完成 {done_count} 檔，跳過已存在 {skip_count} 檔，"
-        f"失敗 {fail_count} 檔（共 {total} 檔）==="
+        "進度：共 %d 檔，已完成 %d，失敗略過 %d，待抓 %d",
+        len(all_ids), len(done), len(failed), len(pending),
     )
+
+    if not pending:
+        log.info("所有股票資料皆已抓取完成，本次無需執行。")
+        return
+
+    for stock_id in pending:
+        elapsed = time.monotonic() - start_time
+        if elapsed > deadline_seconds:
+            log.info("已達時間預算（%.1f 分鐘），安全中斷，剩餘 %d 檔留給下次排程。",
+                      TIME_BUDGET_MINUTES, len(pending) - pending.index(stock_id))
+            break
+
+        retry = 0
+        while retry <= MAX_RETRY_PER_STOCK:
+            try:
+                resp = fetch_price(stock_id)
+            except requests.RequestException as e:
+                retry += 1
+                log.warning("[%s] 網路錯誤：%s，重試 %d/%d", stock_id, e, retry, MAX_RETRY_PER_STOCK)
+                time.sleep(5 * retry)
+                continue
+
+            if resp.status_code == 200:
+                rows = resp.json().get("data", [])
+                save_price_csv(stock_id, rows)
+                done.add(stock_id)
+                progress["done"] = sorted(done)
+                save_progress(progress)
+                break
+
+            elif resp.status_code == 402:
+                # 超過本小時額度上限，等待到下個整點再繼續
+                log.warning("[%s] 額度已滿（402），暫停等待下個小時...", stock_id)
+                time.sleep(65 * 60 - (time.time() % 3600))
+                continue
+
+            elif resp.status_code == 403:
+                # IP 被暫時封鎖，直接安全結束，交給下一次排程（6小時後）處理
+                log.error("[%s] IP 被暫時封鎖（403），本次執行安全結束，等待下次排程重試。", stock_id)
+                save_progress(progress)
+                return
+
+            else:
+                # 其他 4xx/5xx：記為失敗，避免卡住整個流程，之後可人工檢查
+                log.error("[%s] 請求失敗，status=%d，body=%s", stock_id, resp.status_code, resp.text[:200])
+                failed.add(stock_id)
+                progress["failed"] = sorted(failed)
+                save_progress(progress)
+                break
+
+        time.sleep(REQUEST_INTERVAL_SECONDS)
+
+    remaining = len(all_ids) - len(done) - len(failed)
+    log.info("本次執行結束。已完成 %d / %d 檔，尚餘 %d 檔待下次排程繼續。",
+              len(done), len(all_ids), remaining)
 
 
 if __name__ == "__main__":
     main()
+
