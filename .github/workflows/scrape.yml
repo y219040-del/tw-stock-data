@@ -27,8 +27,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: 安裝套件
-        run: pip install twstock yfinance pandas requests
+      - name: 安裝套件（改用 FinMind API，改成 requests + pandas 即可）
+        run: pip install pandas requests
 
       - name: 執行爬蟲（有時間預算，時間到會安全中斷）
         env:
