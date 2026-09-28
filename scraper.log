@@ -6949,3 +6949,206 @@
 2026-09-27 23:57:11,428 [INFO] [8354] 已存 2437 筆 → output/prices/8354.csv
 2026-09-27 23:57:24,431 [INFO] 已達時間預算（340.0 分鐘），安全中斷，剩餘 201 檔留給下次排程。
 2026-09-27 23:57:24,431 [INFO] 本次執行結束。已完成 2948 / 3149 檔，尚餘 201 檔待下次排程繼續。
+2026-09-28 00:24:17,137 [INFO] 進度：共 3149 檔，已完成 2948，失敗略過 0，待抓 201
+2026-09-28 00:24:17,958 [INFO] [8358] 已存 2436 筆 → output/prices/8358.csv
+2026-09-28 00:24:31,714 [INFO] [8359] 已存 2436 筆 → output/prices/8359.csv
+2026-09-28 00:24:45,582 [INFO] [8367] 已存 2323 筆 → output/prices/8367.csv
+2026-09-28 00:24:59,330 [INFO] [8374] 已存 2436 筆 → output/prices/8374.csv
+2026-09-28 00:25:13,134 [INFO] [8383] 已存 2436 筆 → output/prices/8383.csv
+2026-09-28 00:25:27,068 [INFO] [8390] 已存 2429 筆 → output/prices/8390.csv
+2026-09-28 00:25:40,878 [INFO] [8401] 已存 2436 筆 → output/prices/8401.csv
+2026-09-28 00:25:54,622 [INFO] [8403] 已存 2436 筆 → output/prices/8403.csv
+2026-09-28 00:26:08,407 [INFO] [8404] 已存 2436 筆 → output/prices/8404.csv
+2026-09-28 00:26:22,031 [INFO] [8406] 已存 1357 筆 → output/prices/8406.csv
+2026-09-28 00:26:35,870 [INFO] [8409] 已存 2436 筆 → output/prices/8409.csv
+2026-09-28 00:26:49,666 [INFO] [8410] 已存 2436 筆 → output/prices/8410.csv
+2026-09-28 00:27:03,487 [INFO] [8411] 已存 2436 筆 → output/prices/8411.csv
+2026-09-28 00:27:17,231 [INFO] [8415] 已存 2436 筆 → output/prices/8415.csv
+2026-09-28 00:27:31,001 [INFO] [8416] 已存 2436 筆 → output/prices/8416.csv
+2026-09-28 00:27:44,611 [INFO] [8418] 已存 1791 筆 → output/prices/8418.csv
+2026-09-28 00:27:58,353 [INFO] [8420] 已存 1987 筆 → output/prices/8420.csv
+2026-09-28 00:28:12,114 [INFO] [8421] 已存 2436 筆 → output/prices/8421.csv
+2026-09-28 00:28:25,894 [INFO] [8422] 已存 2429 筆 → output/prices/8422.csv
+2026-09-28 00:28:39,790 [INFO] [8423] 已存 2436 筆 → output/prices/8423.csv
+2026-09-28 00:28:53,537 [INFO] [8424] 已存 2436 筆 → output/prices/8424.csv
+2026-09-28 00:29:07,291 [INFO] [8426] 已存 2436 筆 → output/prices/8426.csv
+2026-09-28 00:29:20,907 [INFO] [8427] 已存 1320 筆 → output/prices/8427.csv
+2026-09-28 00:29:34,637 [INFO] [8429] 已存 2436 筆 → output/prices/8429.csv
+2026-09-28 00:29:48,413 [INFO] [8431] 已存 2436 筆 → output/prices/8431.csv
+2026-09-28 00:30:02,201 [INFO] [8432] 已存 2436 筆 → output/prices/8432.csv
+2026-09-28 00:30:18,706 [INFO] [8433] 已存 2436 筆 → output/prices/8433.csv
+2026-09-28 00:30:34,096 [INFO] [8435] 已存 2436 筆 → output/prices/8435.csv
+2026-09-28 00:30:47,926 [INFO] [8436] 已存 2436 筆 → output/prices/8436.csv
+2026-09-28 00:31:01,686 [INFO] [8437] 已存 2436 筆 → output/prices/8437.csv
+2026-09-28 00:31:15,450 [INFO] [8438] 已存 2436 筆 → output/prices/8438.csv
+2026-09-28 00:31:29,196 [INFO] [8440] 已存 2436 筆 → output/prices/8440.csv
+2026-09-28 00:31:42,961 [INFO] [8442] 已存 2410 筆 → output/prices/8442.csv
+2026-09-28 00:31:56,732 [INFO] [8443] 已存 2436 筆 → output/prices/8443.csv
+2026-09-28 00:32:10,496 [INFO] [8444] 已存 2436 筆 → output/prices/8444.csv
+2026-09-28 00:32:24,241 [INFO] [8446] 已存 2436 筆 → output/prices/8446.csv
+2026-09-28 00:32:37,988 [INFO] [8450] 已存 2436 筆 → output/prices/8450.csv
+2026-09-28 00:32:51,740 [INFO] [8454] 已存 2436 筆 → output/prices/8454.csv
+2026-09-28 00:33:05,502 [INFO] [8455] 已存 2436 筆 → output/prices/8455.csv
+2026-09-28 00:33:19,237 [INFO] [8458] 已存 2429 筆 → output/prices/8458.csv
+2026-09-28 00:33:32,999 [INFO] [8462] 已存 2436 筆 → output/prices/8462.csv
+2026-09-28 00:33:46,749 [INFO] [8463] 已存 2436 筆 → output/prices/8463.csv
+2026-09-28 00:34:00,530 [INFO] [8464] 已存 2436 筆 → output/prices/8464.csv
+2026-09-28 00:34:14,315 [INFO] [8466] 已存 2415 筆 → output/prices/8466.csv
+2026-09-28 00:34:28,130 [INFO] [8467] 已存 2435 筆 → output/prices/8467.csv
+2026-09-28 00:34:41,877 [INFO] [8472] 已存 2436 筆 → output/prices/8472.csv
+2026-09-28 00:34:55,630 [INFO] [8473] 已存 2436 筆 → output/prices/8473.csv
+2026-09-28 00:35:09,429 [INFO] [8476] 已存 2430 筆 → output/prices/8476.csv
+2026-09-28 00:35:23,217 [INFO] [8477] 已存 2436 筆 → output/prices/8477.csv
+2026-09-28 00:35:37,033 [INFO] [8478] 已存 2436 筆 → output/prices/8478.csv
+2026-09-28 00:35:50,634 [INFO] [8480] 已存 1523 筆 → output/prices/8480.csv
+2026-09-28 00:36:04,372 [INFO] [8481] 已存 2436 筆 → output/prices/8481.csv
+2026-09-28 00:36:18,102 [INFO] [8482] 已存 1974 筆 → output/prices/8482.csv
+2026-09-28 00:36:31,865 [INFO] [8487] 已存 2436 筆 → output/prices/8487.csv
+2026-09-28 00:36:45,620 [INFO] [8488] 已存 2371 筆 → output/prices/8488.csv
+2026-09-28 00:36:59,387 [INFO] [8489] 已存 2436 筆 → output/prices/8489.csv
+2026-09-28 00:37:12,987 [INFO] [8497] 已存 961 筆 → output/prices/8497.csv
+2026-09-28 00:37:26,826 [INFO] [8499] 已存 2144 筆 → output/prices/8499.csv
+2026-09-28 00:37:40,599 [INFO] [8905] 已存 2420 筆 → output/prices/8905.csv
+2026-09-28 00:37:54,381 [INFO] [8906] 已存 2429 筆 → output/prices/8906.csv
+2026-09-28 00:38:08,194 [INFO] [8908] 已存 2436 筆 → output/prices/8908.csv
+2026-09-28 00:38:22,006 [INFO] [8916] 已存 2436 筆 → output/prices/8916.csv
+2026-09-28 00:38:35,669 [INFO] [8916A] 已存 1083 筆 → output/prices/8916A.csv
+2026-09-28 00:38:49,406 [INFO] [8917] 已存 2436 筆 → output/prices/8917.csv
+2026-09-28 00:39:03,045 [INFO] [8921] 已存 2436 筆 → output/prices/8921.csv
+2026-09-28 00:39:16,850 [INFO] [8923] 已存 2436 筆 → output/prices/8923.csv
+2026-09-28 00:39:30,631 [INFO] [8924] 已存 2429 筆 → output/prices/8924.csv
+2026-09-28 00:39:44,398 [INFO] [8926] 已存 2436 筆 → output/prices/8926.csv
+2026-09-28 00:39:58,158 [INFO] [8927] 已存 2436 筆 → output/prices/8927.csv
+2026-09-28 00:40:11,916 [INFO] [8928] 已存 2436 筆 → output/prices/8928.csv
+2026-09-28 00:40:25,673 [INFO] [8929] 已存 2436 筆 → output/prices/8929.csv
+2026-09-28 00:40:39,483 [INFO] [8930] 已存 2436 筆 → output/prices/8930.csv
+2026-09-28 00:40:53,253 [INFO] [8931] 已存 2436 筆 → output/prices/8931.csv
+2026-09-28 00:41:07,080 [INFO] [8932] 已存 2422 筆 → output/prices/8932.csv
+2026-09-28 00:41:20,853 [INFO] [8933] 已存 2429 筆 → output/prices/8933.csv
+2026-09-28 00:41:34,429 [INFO] [8934] 已存 1013 筆 → output/prices/8934.csv
+2026-09-28 00:41:48,197 [INFO] [8935] 已存 2427 筆 → output/prices/8935.csv
+2026-09-28 00:42:01,949 [INFO] [8936] 已存 2436 筆 → output/prices/8936.csv
+2026-09-28 00:42:15,700 [INFO] [8937] 已存 2430 筆 → output/prices/8937.csv
+2026-09-28 00:42:29,456 [INFO] [8938] 已存 2436 筆 → output/prices/8938.csv
+2026-09-28 00:42:43,204 [INFO] [8940] 已存 2436 筆 → output/prices/8940.csv
+2026-09-28 00:42:56,967 [INFO] [8941] 已存 2436 筆 → output/prices/8941.csv
+2026-09-28 00:43:10,729 [INFO] [8942] 已存 2436 筆 → output/prices/8942.csv
+2026-09-28 00:43:25,286 [INFO] [8996] 已存 2436 筆 → output/prices/8996.csv
+2026-09-28 00:43:38,771 [INFO] [8999] 已存 414 筆 → output/prices/8999.csv
+2026-09-28 00:43:52,213 [INFO] [910069] 無資料，略過存檔
+2026-09-28 00:44:05,635 [INFO] [9101] 無資料，略過存檔
+2026-09-28 00:44:19,081 [INFO] [9102] 無資料，略過存檔
+2026-09-28 00:44:32,894 [INFO] [9103] 已存 2436 筆 → output/prices/9103.csv
+2026-09-28 00:44:46,667 [INFO] [910322] 已存 2430 筆 → output/prices/910322.csv
+2026-09-28 00:45:00,138 [INFO] [9104] 無資料，略過存檔
+2026-09-28 00:45:13,723 [INFO] [910482] 已存 906 筆 → output/prices/910482.csv
+2026-09-28 00:45:27,495 [INFO] [9105] 已存 2436 筆 → output/prices/9105.csv
+2026-09-28 00:45:40,918 [INFO] [910579] 無資料，略過存檔
+2026-09-28 00:45:54,366 [INFO] [9106] 已存 179 筆 → output/prices/9106.csv
+2026-09-28 00:46:07,988 [INFO] [910708] 已存 658 筆 → output/prices/910708.csv
+2026-09-28 00:46:21,489 [INFO] [910801] 已存 298 筆 → output/prices/910801.csv
+2026-09-28 00:46:35,286 [INFO] [910861] 已存 2435 筆 → output/prices/910861.csv
+2026-09-28 00:46:48,769 [INFO] [910948] 無資料，略過存檔
+2026-09-28 00:47:02,549 [INFO] [9110] 已存 2435 筆 → output/prices/9110.csv
+2026-09-28 00:47:16,015 [INFO] [911201] 無資料，略過存檔
+2026-09-28 00:47:29,436 [INFO] [911602] 無資料，略過存檔
+2026-09-28 00:47:42,858 [INFO] [911606] 無資料，略過存檔
+2026-09-28 00:47:56,637 [INFO] [911608] 已存 2436 筆 → output/prices/911608.csv
+2026-09-28 00:48:10,064 [INFO] [911609] 無資料，略過存檔
+2026-09-28 00:48:23,493 [INFO] [911610] 無資料，略過存檔
+2026-09-28 00:48:36,972 [INFO] [911611] 已存 41 筆 → output/prices/911611.csv
+2026-09-28 00:48:50,441 [INFO] [911612] 無資料，略過存檔
+2026-09-28 00:49:04,053 [INFO] [911616] 已存 1204 筆 → output/prices/911616.csv
+2026-09-28 00:49:17,515 [INFO] [911619] 已存 707 筆 → output/prices/911619.csv
+2026-09-28 00:49:31,291 [INFO] [911622] 已存 2431 筆 → output/prices/911622.csv
+2026-09-28 00:49:44,748 [INFO] [911626] 無資料，略過存檔
+2026-09-28 00:49:58,504 [INFO] [911868] 已存 2436 筆 → output/prices/911868.csv
+2026-09-28 00:50:14,369 [INFO] [912000] 已存 2436 筆 → output/prices/912000.csv
+2026-09-28 00:50:28,030 [INFO] [912398] 已存 1268 筆 → output/prices/912398.csv
+2026-09-28 00:50:41,828 [INFO] [9136] 已存 2436 筆 → output/prices/9136.csv
+2026-09-28 00:50:55,316 [INFO] [913889] 無資料，略過存檔
+2026-09-28 00:51:08,732 [INFO] [9151] 無資料，略過存檔
+2026-09-28 00:51:22,364 [INFO] [9157] 已存 764 筆 → output/prices/9157.csv
+2026-09-28 00:51:35,855 [INFO] [916665] 無資料，略過存檔
+2026-09-28 00:51:49,512 [INFO] [9188] 已存 1325 筆 → output/prices/9188.csv
+2026-09-28 00:52:02,926 [INFO] [9801] 無資料，略過存檔
+2026-09-28 00:52:16,682 [INFO] [9802] 已存 2436 筆 → output/prices/9802.csv
+2026-09-28 00:52:30,432 [INFO] [9902] 已存 2436 筆 → output/prices/9902.csv
+2026-09-28 00:52:44,205 [INFO] [9904] 已存 2436 筆 → output/prices/9904.csv
+2026-09-28 00:52:57,958 [INFO] [9905] 已存 2436 筆 → output/prices/9905.csv
+2026-09-28 00:53:12,111 [INFO] [9906] 已存 2436 筆 → output/prices/9906.csv
+2026-09-28 00:53:25,881 [INFO] [9907] 已存 2436 筆 → output/prices/9907.csv
+2026-09-28 00:53:39,653 [INFO] [9908] 已存 2436 筆 → output/prices/9908.csv
+2026-09-28 00:53:53,454 [INFO] [9910] 已存 2436 筆 → output/prices/9910.csv
+2026-09-28 00:54:07,205 [INFO] [9911] 已存 2426 筆 → output/prices/9911.csv
+2026-09-28 00:54:20,955 [INFO] [9912] 已存 2436 筆 → output/prices/9912.csv
+2026-09-28 00:54:34,787 [INFO] [9914] 已存 2436 筆 → output/prices/9914.csv
+2026-09-28 00:54:48,262 [INFO] [9915] 無資料，略過存檔
+2026-09-28 00:55:02,067 [INFO] [9917] 已存 2436 筆 → output/prices/9917.csv
+2026-09-28 00:55:15,812 [INFO] [9918] 已存 2436 筆 → output/prices/9918.csv
+2026-09-28 00:55:29,613 [INFO] [9919] 已存 2436 筆 → output/prices/9919.csv
+2026-09-28 00:55:43,380 [INFO] [9921] 已存 2436 筆 → output/prices/9921.csv
+2026-09-28 00:55:56,841 [INFO] [9922] 無資料，略過存檔
+2026-09-28 00:56:10,622 [INFO] [9924] 已存 2430 筆 → output/prices/9924.csv
+2026-09-28 00:56:24,377 [INFO] [9925] 已存 2436 筆 → output/prices/9925.csv
+2026-09-28 00:56:38,132 [INFO] [9926] 已存 2434 筆 → output/prices/9926.csv
+2026-09-28 00:56:51,893 [INFO] [9927] 已存 2422 筆 → output/prices/9927.csv
+2026-09-28 00:57:05,639 [INFO] [9928] 已存 2420 筆 → output/prices/9928.csv
+2026-09-28 00:57:19,429 [INFO] [9929] 已存 2429 筆 → output/prices/9929.csv
+2026-09-28 00:57:33,172 [INFO] [9930] 已存 2436 筆 → output/prices/9930.csv
+2026-09-28 00:57:48,631 [INFO] [9931] 已存 2431 筆 → output/prices/9931.csv
+2026-09-28 00:58:02,393 [INFO] [9933] 已存 2436 筆 → output/prices/9933.csv
+2026-09-28 00:58:16,147 [INFO] [9934] 已存 2436 筆 → output/prices/9934.csv
+2026-09-28 00:58:29,902 [INFO] [9935] 已存 2436 筆 → output/prices/9935.csv
+2026-09-28 00:58:43,700 [INFO] [9937] 已存 2436 筆 → output/prices/9937.csv
+2026-09-28 00:58:57,449 [INFO] [9938] 已存 2436 筆 → output/prices/9938.csv
+2026-09-28 00:59:11,274 [INFO] [9939] 已存 2436 筆 → output/prices/9939.csv
+2026-09-28 00:59:25,065 [INFO] [9940] 已存 2436 筆 → output/prices/9940.csv
+2026-09-28 00:59:38,890 [INFO] [9941] 已存 2436 筆 → output/prices/9941.csv
+2026-09-28 00:59:52,678 [INFO] [9941A] 已存 1898 筆 → output/prices/9941A.csv
+2026-09-28 01:00:06,425 [INFO] [9942] 已存 2436 筆 → output/prices/9942.csv
+2026-09-28 01:00:20,233 [INFO] [9943] 已存 2429 筆 → output/prices/9943.csv
+2026-09-28 01:00:33,999 [INFO] [9944] 已存 2436 筆 → output/prices/9944.csv
+2026-09-28 01:00:47,921 [INFO] [9945] 已存 2422 筆 → output/prices/9945.csv
+2026-09-28 01:01:01,695 [INFO] [9946] 已存 2436 筆 → output/prices/9946.csv
+2026-09-28 01:01:15,521 [INFO] [9949] 已存 2436 筆 → output/prices/9949.csv
+2026-09-28 01:01:29,287 [INFO] [9950] 已存 2436 筆 → output/prices/9950.csv
+2026-09-28 01:01:43,093 [INFO] [9951] 已存 2436 筆 → output/prices/9951.csv
+2026-09-28 01:01:56,922 [INFO] [9955] 已存 2436 筆 → output/prices/9955.csv
+2026-09-28 01:02:10,688 [INFO] [9957] 已存 2436 筆 → output/prices/9957.csv
+2026-09-28 01:02:24,439 [INFO] [9958] 已存 2436 筆 → output/prices/9958.csv
+2026-09-28 01:02:38,207 [INFO] [9960] 已存 2436 筆 → output/prices/9960.csv
+2026-09-28 01:02:51,967 [INFO] [9962] 已存 2436 筆 → output/prices/9962.csv
+2026-09-28 01:03:05,774 [INFO] [Automobile] 已存 2436 筆 → output/prices/Automobile.csv
+2026-09-28 01:03:19,535 [INFO] [BiotechnologyMedicalCare] 已存 2436 筆 → output/prices/BiotechnologyMedicalCare.csv
+2026-09-28 01:03:33,325 [INFO] [BuildingMaterialConstruction] 已存 2436 筆 → output/prices/BuildingMaterialConstruction.csv
+2026-09-28 01:03:47,091 [INFO] [Cement] 已存 2436 筆 → output/prices/Cement.csv
+2026-09-28 01:04:00,864 [INFO] [Chemical] 已存 2436 筆 → output/prices/Chemical.csv
+2026-09-28 01:04:14,634 [INFO] [ChemicalBiotechnologyMedicalCare] 已存 2436 筆 → output/prices/ChemicalBiotechnologyMedicalCare.csv
+2026-09-28 01:04:28,432 [INFO] [CommunicationsInternet] 已存 2436 筆 → output/prices/CommunicationsInternet.csv
+2026-09-28 01:04:42,210 [INFO] [ComputerPeripheralEquipment] 已存 2436 筆 → output/prices/ComputerPeripheralEquipment.csv
+2026-09-28 01:04:56,127 [INFO] [ElectricMachinery] 已存 2436 筆 → output/prices/ElectricMachinery.csv
+2026-09-28 01:05:09,933 [INFO] [ElectricalCable] 已存 2436 筆 → output/prices/ElectricalCable.csv
+2026-09-28 01:05:23,854 [INFO] [Electronic] 已存 2436 筆 → output/prices/Electronic.csv
+2026-09-28 01:05:37,848 [INFO] [ElectronicPartsComponents] 已存 2436 筆 → output/prices/ElectronicPartsComponents.csv
+2026-09-28 01:05:51,641 [INFO] [ElectronicProductsDistribution] 已存 2436 筆 → output/prices/ElectronicProductsDistribution.csv
+2026-09-28 01:06:05,531 [INFO] [FinancialInsurance] 已存 2436 筆 → output/prices/FinancialInsurance.csv
+2026-09-28 01:06:19,460 [INFO] [Food] 已存 2436 筆 → output/prices/Food.csv
+2026-09-28 01:06:33,250 [INFO] [GlassCeramic] 已存 2436 筆 → output/prices/GlassCeramic.csv
+2026-09-28 01:06:47,068 [INFO] [InformationService] 已存 2436 筆 → output/prices/InformationService.csv
+2026-09-28 01:07:00,862 [INFO] [IronSteel] 已存 2436 筆 → output/prices/IronSteel.csv
+2026-09-28 01:07:14,671 [INFO] [OilGasElectricity] 已存 2436 筆 → output/prices/OilGasElectricity.csv
+2026-09-28 01:07:28,466 [INFO] [Optoelectronic] 已存 2436 筆 → output/prices/Optoelectronic.csv
+2026-09-28 01:07:43,495 [INFO] [Other] 已存 2436 筆 → output/prices/Other.csv
+2026-09-28 01:07:57,527 [INFO] [OtherElectronic] 已存 2436 筆 → output/prices/OtherElectronic.csv
+2026-09-28 01:08:12,955 [INFO] [PaperPulp] 已存 2436 筆 → output/prices/PaperPulp.csv
+2026-09-28 01:08:28,462 [INFO] [Plastics] 已存 2436 筆 → output/prices/Plastics.csv
+2026-09-28 01:08:42,254 [INFO] [Rubber] 已存 2436 筆 → output/prices/Rubber.csv
+2026-09-28 01:08:56,781 [INFO] [Semiconductor] 已存 2436 筆 → output/prices/Semiconductor.csv
+2026-09-28 01:09:10,609 [INFO] [ShippingTransportation] 已存 2436 筆 → output/prices/ShippingTransportation.csv
+2026-09-28 01:09:24,612 [INFO] [TAIEX] 已存 2436 筆 → output/prices/TAIEX.csv
+2026-09-28 01:09:38,426 [INFO] [TPEx] 已存 2436 筆 → output/prices/TPEx.csv
+2026-09-28 01:09:52,208 [INFO] [Textiles] 已存 2436 筆 → output/prices/Textiles.csv
+2026-09-28 01:10:06,012 [INFO] [Tourism] 已存 2436 筆 → output/prices/Tourism.csv
+2026-09-28 01:10:19,886 [INFO] [TradingConsumersGoods] 已存 2436 筆 → output/prices/TradingConsumersGoods.csv
+2026-09-28 01:10:32,888 [INFO] 本次執行結束。已完成 3149 / 3149 檔，尚餘 0 檔待下次排程繼續。
